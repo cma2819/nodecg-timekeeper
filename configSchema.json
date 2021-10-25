@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "disableDashboardControl": {
+            "type": "boolean",
+            "default": false
+        },
+        "tickRateMs": {
+            "type": "number",
+            "minimum": 1,
+            "default": 100
+        }
+    }
+}

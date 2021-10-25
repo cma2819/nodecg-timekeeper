@@ -1,0 +1,10 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "display": { "type": "string" },
+        "rawInSecond": { "type": "number" }
+    },
+    "required": ["display", "rawInSecond"]
+}

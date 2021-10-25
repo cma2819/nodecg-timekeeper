@@ -1,0 +1,101 @@
+{
+  "name": "nodecg-timekeeper",
+  "version": "0.9.0",
+  "description": "Simple timer for timekeeping program.",
+  "homepage": "",
+  "author": {
+    "name": "Cma",
+    "email": "chicchaima@gmail.com"
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension"
+  ],
+  "keywords": [
+    "node.js",
+    "nodecg",
+    "react",
+    "nodecg-bundle"
+  ],
+  "scripts": {
+    "autofix": "run-s autofix:*",
+    "autofix:browser": "npm run lint:browser -- --fix",
+    "autofix:nodecg": "npm run lint:nodecg -- --fix",
+    "build": "webpack --mode=production",
+    "lint": "run-s lint:*",
+    "lint:browser": "eslint --ext .ts,.tsx src/browser",
+    "lint:nodecg": "eslint --ext .ts src/nodecg",
+    "dev": "webpack --watch --mode=development",
+    "schema-types": "nodecg schema-types -o src/nodecg/generated schemas",
+    "test": "jest"
+  },
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "timekeeping",
+        "title": "Timekeeper",
+        "width": 2,
+        "file": "timekeeping.html"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "timekeeper.html",
+        "width": "1920",
+        "height": "1080",
+        "singleInstance": false
+      }
+    ]
+  },
+  "repository": "https://github.com/cma2819/nodecg-timekeeper.git",
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@mui/icons-material": "^5.0.3",
+    "@mui/material": "^5.0.3",
+    "livesplit-core": "^0.10.2",
+    "lodash.clone": "^4.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-transition-group": "^4.4.2",
+    "styled-components": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/clone": "^2.1.0",
+    "@types/globby": "^9.1.0",
+    "@types/html-webpack-plugin": "^3.2.5",
+    "@types/jest": "^27.0.2",
+    "@types/lodash.clone": "^4.5.6",
+    "@types/node": "^15.6.2",
+    "@types/react": "^17.0.9",
+    "@types/react-dom": "^17.0.6",
+    "@types/react-transition-group": "^4.4.3",
+    "@types/styled-components": "^5.1.10",
+    "@types/webpack-merge": "^5.0.0",
+    "@types/webpack-node-externals": "^2.5.1",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "css-loader": "^6.3.0",
+    "eslint": "^7.27.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "globby": "^11.0.3",
+    "html-webpack-plugin": "^5.3.1",
+    "jest": "^27.2.5",
+    "nodecg-cli": "^7.0.0",
+    "style-loader": "^3.3.0",
+    "ts-jest": "^27.0.5",
+    "ts-loader": "^9.2.3",
+    "ts-node": "^10.0.0",
+    "ts-nodecg": "^0.3.1",
+    "typescript": "^4.3.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-merge": "^5.8.0",
+    "webpack-node-externals": "^3.0.0"
+  }
+}
