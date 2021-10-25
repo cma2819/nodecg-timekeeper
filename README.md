@@ -56,7 +56,7 @@ nodecg install cma2819/nodecg-timekeeper
 
 |key|type|description|
 |:--|:--|:--|
-|time|[Time](#time-data-structure)|現在の時間データ|
+|time|[Time](#time-データの構造)|現在の時間データ|
 |status|`'paused'`\|`'in_progress'`\|`'finished'`|現在の進行ステータス|
 
 ## history
@@ -64,8 +64,15 @@ nodecg install cma2819/nodecg-timekeeper
 完了した時間を保持します.
 
 - name: `history`
-- type: [Time](#time-data-structure) のリスト
+- type: [History](#history-オブジェクト) のリスト
 - [schema](./schemas/history.json)
+
+### History オブジェクト
+
+|key|type|description|
+|:--|:--|:--|
+|time|[Time](#time-データの構造)|現在の時間データ|
+|finishedAt|number|完了日時の [Date の数値](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/valueOf)|
 
 # タイマーの操作
 
