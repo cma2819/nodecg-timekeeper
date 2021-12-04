@@ -56,4 +56,9 @@ describe('Status testing', () => {
     expect(timekeeper.status).toBe('finished');
   })
 
+  test('Initialize with seconds', () => {
+    const timekeeper = new Timekeeper(2000);
+    expect(timekeeper.currentTimeSeconds).toBe(2000);
+  });
+  
 });

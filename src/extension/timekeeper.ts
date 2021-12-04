@@ -19,7 +19,7 @@ export const timekeeper = (nodecg: NodeCG): void => {
     defaultValue: [],
   });
 
-  const timekeeper = new Timekeeper;
+  const timekeeper = new Timekeeper(timekeepingRep.value.time.rawInSecond);
 
   const tick = () => {
     const time = timekeeper.currentTime;
