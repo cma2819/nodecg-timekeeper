@@ -20,6 +20,9 @@ export const timekeeper = (nodecg: NodeCG): void => {
   });
 
   const timekeeper = new Timekeeper(timekeepingRep.value.time.rawInSecond);
+  if (timekeepingRep.value.status === 'in_progress') {
+    timekeeper.resume();
+  }
 
   const tick = () => {
     const time = timekeeper.currentTime;

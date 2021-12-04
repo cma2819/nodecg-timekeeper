@@ -99,7 +99,6 @@ export class Timekeeper {
   }
 
   get currentTimeSeconds(): number {
-    console.log(this.livesplit.currentTime().gameTime()?.totalSeconds());
     return this.livesplit.currentTime().gameTime()?.totalSeconds() || 0;
   }
 }
