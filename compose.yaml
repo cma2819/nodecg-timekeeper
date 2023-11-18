@@ -1,0 +1,28 @@
+services:
+  nodecg:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: root
+    command: sh -c "npm i --omit=dev && node --enable-source-maps ../.."
+    working_dir: /opt/nodecg/bundles/nodecg-timekeeper
+    init: true
+    ports:
+      - 9090:9090
+    volumes:
+      - nodecg_db:/opt/nodecg/db
+      - nodecg_assets:/opt/nodecg/assets
+      - node_modules:/opt/nodecg/bundles/nodecg-timekeeper/node_modules
+      - ./cfg:/opt/nodecg/cfg:ro
+      - ./package.json:/opt/nodecg/bundles/nodecg-timekeeper/package.json:ro
+      - ./package-lock.json:/opt/nodecg/bundles/nodecg-timekeeper/package-lock.json
+      - ./dashboard:/opt/nodecg/bundles/nodecg-timekeeper/dashboard:ro
+      - ./extension:/opt/nodecg/bundles/nodecg-timekeeper/extension:ro
+      - ./graphics:/opt/nodecg/bundles/nodecg-timekeeper/graphics:ro
+      - ./schemas:/opt/nodecg/bundles/nodecg-timekeeper/schemas:ro
+      - ./src:/opt/nodecg/bundles/nodecg-timekeeper/src:ro
+
+volumes:
+  nodecg_db:
+  nodecg_assets:
+  node_modules:
