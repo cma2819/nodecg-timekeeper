@@ -62,3 +62,32 @@ describe('Status testing', () => {
   });
   
 });
+
+describe('Test timekeeper countdown feature', () => {
+  beforeEach(() => {
+    timekeeper = new Timekeeper(0, 2);
+  });
+  
+  test('Start timer', () => {
+    timekeeper.start();
+    expect(timekeeper.status).toBe('in_progress');
+  });
+  
+  test('Finish timer', () => {
+    timekeeper.finish();
+    expect(timekeeper.status).toBe('finished');
+    expect(timekeeper.currentTimeSeconds).toBe(2);
+  });
+  
+  test('Laugh test for current time', async () => {
+    timekeeper.start();
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    expect(timekeeper.currentTimeSeconds).toBeLessThanOrEqual(1);
+  });
+
+  test('Laugh test for negative time display', async () => {
+    timekeeper.start();
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    expect(timekeeper.currentTime.display).toBe("-00:01");
+  });
+});

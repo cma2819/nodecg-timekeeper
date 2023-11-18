@@ -4,13 +4,19 @@ import { Time } from './lib/Time';
 
 export const timekeeper = (nodecg: NodeCG): void => {
 
+  console.log(nodecg.bundleConfig);
+
   const tickRateMs = nodecg.bundleConfig.tickRateMs || 100;
+  const enabledCountdown = nodecg.bundleConfig.countdown?.enabled || false;
+  const offsetSeconds = nodecg.bundleConfig.countdown?.offsetSeconds || 0;
+  const display = enabledCountdown ? Time.make(offsetSeconds).display : '00:00';
+  const rawInSecond = enabledCountdown ? offsetSeconds : 0;
 
   const timekeepingRep = nodecg.Replicant('timekeeping', {
     defaultValue: {
       time: {
-        display: '00:00',
-        rawInSecond: 0,
+        display: display,
+        rawInSecond: rawInSecond,
       },
       status: 'finished',
     }
@@ -19,7 +25,9 @@ export const timekeeper = (nodecg: NodeCG): void => {
     defaultValue: [],
   });
 
-  const timekeeper = new Timekeeper(timekeepingRep.value.time.rawInSecond);
+  const timekeeper = enabledCountdown ?
+    new Timekeeper(offsetSeconds - timekeepingRep.value.time.rawInSecond, offsetSeconds)
+    : new Timekeeper(timekeepingRep.value.time.rawInSecond);
   if (timekeepingRep.value.status === 'in_progress') {
     timekeeper.resume();
   }

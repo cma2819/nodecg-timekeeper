@@ -8,4 +8,8 @@
 export interface Configschema {
 	disableDashboardControl?: boolean;
 	tickRateMs?: number;
+	countdown?: {
+		enabled?: boolean;
+		offsetSeconds?: number;
+  };
 }
