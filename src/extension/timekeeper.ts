@@ -4,8 +4,6 @@ import { Time } from './lib/Time';
 
 export const timekeeper = (nodecg: NodeCG): void => {
 
-  console.log(nodecg.bundleConfig);
-
   const tickRateMs = nodecg.bundleConfig.tickRateMs || 100;
   const enabledCountdown = nodecg.bundleConfig.countdown?.enabled || false;
   const offsetSeconds = nodecg.bundleConfig.countdown?.offsetSeconds || 0;
