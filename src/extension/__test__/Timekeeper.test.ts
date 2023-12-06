@@ -88,6 +88,6 @@ describe('Test timekeeper countdown feature', () => {
   test('Laugh test for negative time display', async () => {
     timekeeper.start();
     await new Promise((resolve) => setTimeout(resolve, 3000));
-    expect(timekeeper.currentTime.display).toBe("-00:01");
+    expect(timekeeper.currentTime.display).toBe('-00:01');
   });
 });
