@@ -26,7 +26,7 @@ export class Timekeeper {
     }
 
     timer.setLoadingTimes(TimeSpan.fromSeconds(0));
-    if (initialSeconds && initialSeconds > 0) {
+    if (initialSeconds) {
       this.initExistsTime(timer, initialSeconds);
     }
     timer.initializeGameTime();

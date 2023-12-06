@@ -14,7 +14,10 @@ export const Timekeeper = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <TimeTextForm time={replicant.timekeeping.time.display} />
+        <TimeTextForm
+          time={replicant.timekeeping.time.display}
+          status={replicant.timekeeping.status}
+        />
       </Grid>
       {
         !disableControl && (

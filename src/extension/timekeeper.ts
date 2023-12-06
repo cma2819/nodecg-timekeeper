@@ -23,7 +23,7 @@ export const timekeeper = (nodecg: NodeCG): void => {
     defaultValue: [],
   });
 
-  const timekeeper = enabledCountdown ?
+  let timekeeper = enabledCountdown ?
     new Timekeeper(offsetSeconds - timekeepingRep.value.time.rawInSecond, offsetSeconds)
     : new Timekeeper(timekeepingRep.value.time.rawInSecond);
   if (timekeepingRep.value.status === 'in_progress') {
@@ -120,6 +120,24 @@ export const timekeeper = (nodecg: NodeCG): void => {
     }
 
     resetHistory();
+
+    cb && cb(null);
+  });
+
+  nodecg.listenFor('edit-time', (time: string, cb) => {
+    if (cb && cb.handled) {
+      return;
+    }
+
+    const timeSplit = time.split(':');
+    if (timeSplit.length === 2) {
+      timeSplit.unshift('00');
+    }
+    const timeSecond = Number(timeSplit[0]) * 3600 + Number(timeSplit[1]) * 60 + Number(timeSplit[2]);
+
+    timekeeper =  enabledCountdown ?
+      new Timekeeper(offsetSeconds - timeSecond, offsetSeconds)
+      : new Timekeeper(timeSecond);
 
     cb && cb(null);
   });

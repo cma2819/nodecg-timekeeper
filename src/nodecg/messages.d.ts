@@ -18,4 +18,8 @@ export type MessageMap = {
   'reset-history': {
     error: Error;
   },
+  'edit-time': {
+    data: string;
+    error: Error;
+  },
 };
