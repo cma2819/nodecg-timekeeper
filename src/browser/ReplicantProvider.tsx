@@ -1,7 +1,6 @@
 import { clone } from 'lodash';
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import { History, Timekeeping } from '../nodecg/generated';
-import { BundleNodecgInstance } from '../nodecg/nodecg';
 
 interface Replicants {
   timekeeping: Timekeeping;
