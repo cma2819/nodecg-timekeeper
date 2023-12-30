@@ -5,12 +5,16 @@ import { Time } from './lib/Time';
 export const timekeeper = (nodecg: NodeCG): void => {
 
   const tickRateMs = nodecg.bundleConfig.tickRateMs || 100;
+  const enabledCountdown = nodecg.bundleConfig.countdown?.enabled || false;
+  const offsetSeconds = nodecg.bundleConfig.countdown?.offsetSeconds || 0;
+  const display = enabledCountdown ? Time.make(offsetSeconds).display : '00:00';
+  const rawInSecond = enabledCountdown ? offsetSeconds : 0;
 
   const timekeepingRep = nodecg.Replicant('timekeeping', {
     defaultValue: {
       time: {
-        display: '00:00',
-        rawInSecond: 0,
+        display: display,
+        rawInSecond: rawInSecond,
       },
       status: 'finished',
     }
@@ -19,7 +23,9 @@ export const timekeeper = (nodecg: NodeCG): void => {
     defaultValue: [],
   });
 
-  const timekeeper = new Timekeeper(timekeepingRep.value.time.rawInSecond);
+  let timekeeper = enabledCountdown ?
+    new Timekeeper(offsetSeconds - timekeepingRep.value.time.rawInSecond, offsetSeconds)
+    : new Timekeeper(timekeepingRep.value.time.rawInSecond);
   if (timekeepingRep.value.status === 'in_progress') {
     timekeeper.resume();
   }
@@ -114,6 +120,24 @@ export const timekeeper = (nodecg: NodeCG): void => {
     }
 
     resetHistory();
+
+    cb && cb(null);
+  });
+
+  nodecg.listenFor('edit-time', (time: string, cb) => {
+    if (cb && cb.handled) {
+      return;
+    }
+
+    const timeSplit = time.split(':');
+    if (timeSplit.length === 2) {
+      timeSplit.unshift('00');
+    }
+    const timeSecond = Number(timeSplit[0]) * 3600 + Number(timeSplit[1]) * 60 + Number(timeSplit[2]);
+
+    timekeeper =  enabledCountdown ?
+      new Timekeeper(offsetSeconds - timeSecond, offsetSeconds)
+      : new Timekeeper(timeSecond);
 
     cb && cb(null);
   });

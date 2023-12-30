@@ -1,12 +1,13 @@
-FROM node:14
+FROM ghcr.io/nodecg/nodecg:2.1.11
 
-RUN mkdir /nodecg
-WORKDIR /nodecg
+USER root
 
-RUN npm install -g nodecg-cli && \
-    nodecg setup
+WORKDIR /opt/nodecg/bundles/nodecg-timekeeper
+COPY . /opt/nodecg/bundles/nodecg-timekeeper
+RUN npm i
 
-VOLUME [ "/nodecg/bundles", "/nodecg/cfg", "/nodecg/db", "/nodecg/logs" ]
+WORKDIR /opt/nodecg
+
 EXPOSE 9090
 
 CMD ["nodecg", "start"]

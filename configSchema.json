@@ -11,6 +11,20 @@
             "type": "number",
             "minimum": 1,
             "default": 100
+        },
+        "countdown": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "offsetSeconds": {
+                    "type": "number",
+                    "default": 60
+                }
+            }
         }
     }
 }

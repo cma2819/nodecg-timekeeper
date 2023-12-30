@@ -14,8 +14,9 @@ const TimerPhase = {
 export class Timekeeper {
 
   protected livesplit: Timer;
+  protected countdownOffset = 0;
 
-  constructor(initialSeconds?: number) {
+  constructor(initialSeconds?: number, countdownOffset?: number) {
     const run = Run.new();
     run.pushSegment(Segment.new('Finish'));
 
@@ -25,12 +26,15 @@ export class Timekeeper {
     }
 
     timer.setLoadingTimes(TimeSpan.fromSeconds(0));
-    if (initialSeconds && initialSeconds > 0) {
+    if (initialSeconds) {
       this.initExistsTime(timer, initialSeconds);
     }
     timer.initializeGameTime();
 
     this.livesplit = timer;
+    if (countdownOffset && countdownOffset > 0) {
+      this.countdownOffset = countdownOffset;
+    }
   }
 
   start(): void {
@@ -99,6 +103,10 @@ export class Timekeeper {
   }
 
   get currentTimeSeconds(): number {
-    return this.livesplit.currentTime().gameTime()?.totalSeconds() || 0;
+    const currentTimeSeconds = this.livesplit.currentTime().gameTime()?.totalSeconds() || 0;
+    if (this.countdownOffset > 0) {
+      return this.countdownOffset - Math.floor(currentTimeSeconds);
+    }
+    return currentTimeSeconds;
   }
 }
